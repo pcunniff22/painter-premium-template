@@ -1,713 +1,1004 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{BUSINESS_NAME}} | Premium Painting Services</title>
-    <meta name="description" content="Premium residential and commercial painting services in {{CITY}}. Licensed, insured, and committed to flawless finishes.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <style>
-        :root {
-            --color-primary: #1a1a2e;
-            --color-secondary: #16213e;
-            --color-accent: #c9a227;
-            --color-accent-hover: #b8941f;
-            --color-accent-light: rgba(201,162,39,0.12);
-            --color-cream: #faf9f6;
-            --color-cream-dark: #f2f0eb;
-            --color-text: #2d2d2d;
-            --color-text-light: #666;
-            --color-white: #ffffff;
-            --font-display: 'Playfair Display', Georgia, serif;
-            --font-body: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif;
-            --space-xs: 0.5rem; --space-sm: 1rem; --space-md: 2rem; --space-lg: 4rem; --space-xl: 6rem; --space-2xl: 8rem;
-            --transition-fast: 0.2s ease; --transition-medium: 0.4s ease;
-            --shadow-sm: 0 2px 8px rgba(0,0,0,0.08); --shadow-md: 0 8px 30px rgba(0,0,0,0.12); --shadow-lg: 0 20px 60px rgba(0,0,0,0.15);
-            --radius: 10px;
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body { font-family: var(--font-body); font-size: 16px; line-height: 1.7; color: var(--color-text); background-color: var(--color-cream); -webkit-font-smoothing: antialiased; }
-        h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 600; line-height: 1.2; color: var(--color-primary); }
-        h1 { font-size: clamp(2.5rem, 5vw, 4rem); }
-        h2 { font-size: clamp(2rem, 4vw, 3rem); }
-        h3 { font-size: clamp(1.25rem, 2vw, 1.5rem); }
-        p { color: var(--color-text-light); }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{BUSINESS_NAME}} | Premium Painting for Discerning Homeowners</title>
+<meta name="description" content="{{BUSINESS_NAME}} delivers premium residential and commercial painting across {{CITY}}, MA. Licensed, insured, and committed to flawless finishes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+/* ─── Variables ──────────────────────────────────────────────── */
+:root {
+  --navy:        #1B2A4A;
+  --navy-dark:   #111D33;
+  --navy-light:  #243558;
+  --sienna:      #C8773A;
+  --sienna-dark: #A85F28;
+  --sienna-bg:   rgba(200,119,58,.12);
+  --cream:       #FAF8F4;
+  --cream-dark:  #F0EBE1;
+  --cream-darker:#E4DDD0;
+  --white:       #FFFFFF;
+  --text:        #1C1C22;
+  --text-mid:    #4A4A55;
+  --text-light:  #787880;
 
-        /* ── Scroll reveal ─────────────────────────────────────── */
-        .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.65s ease, transform 0.65s ease; }
-        .reveal.visible { opacity: 1; transform: translateY(0); }
-        .reveal-delay-1 { transition-delay: 0.1s; }
-        .reveal-delay-2 { transition-delay: 0.2s; }
-        .reveal-delay-3 { transition-delay: 0.3s; }
-        .reveal-delay-4 { transition-delay: 0.4s; }
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body:    'Source Sans 3', -apple-system, sans-serif;
 
-        /* ── Navigation ────────────────────────────────────────── */
-        .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: var(--space-sm) 0; transition: all var(--transition-medium); }
-        .nav.scrolled { background-color: var(--color-white); box-shadow: var(--shadow-sm); padding: 0.6rem 0; }
-        .nav-container { max-width: 1400px; margin: 0 auto; padding: 0 var(--space-md); display: flex; justify-content: space-between; align-items: center; }
-        .nav-logo { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: var(--color-white); text-decoration: none; transition: color var(--transition-fast); display: flex; align-items: center; gap: 0.5rem; }
-        .nav-logo-dot { width: 10px; height: 10px; background: var(--color-accent); border-radius: 50%; display: inline-block; flex-shrink: 0; }
-        .nav.scrolled .nav-logo { color: var(--color-primary); }
-        .nav-links { display: flex; gap: var(--space-md); align-items: center; }
-        .nav-link { font-size: 0.95rem; font-weight: 500; color: var(--color-white); text-decoration: none; transition: color var(--transition-fast); position: relative; }
-        .nav.scrolled .nav-link { color: var(--color-text); }
-        .nav-link::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background-color: var(--color-accent); transition: width var(--transition-fast); }
-        .nav-link:hover::after { width: 100%; }
-        .nav-cta { background-color: var(--color-accent); color: var(--color-primary) !important; padding: 0.75rem 1.5rem; border-radius: 4px; font-weight: 600; text-decoration: none; transition: all var(--transition-fast); }
-        .nav-cta:hover { background-color: var(--color-accent-hover); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(201,162,39,0.35); }
-        .nav-cta::after { display: none; }
-        .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: var(--space-xs); color: var(--color-white); }
-        .nav.scrolled .nav-toggle { color: var(--color-primary); }
+  --sp-xs: .5rem; --sp-sm: 1rem; --sp-md: 2rem;
+  --sp-lg: 4rem;  --sp-xl: 6rem; --sp-2xl: 9rem;
 
-        /* ── Hero ──────────────────────────────────────────────── */
-        .hero { min-height: 100vh; display: flex; align-items: center; position: relative; background: linear-gradient(135deg, var(--color-primary) 0%, #0f1124 100%); overflow: hidden; }
-        .hero::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(circle at 20% 50%, rgba(201,162,39,0.05) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(255,255,255,0.03) 0%, transparent 40%); }
-        .hero-content { max-width: 1400px; margin: 0 auto; padding: var(--space-2xl) var(--space-md); position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-xl); align-items: center; }
-        .hero-text { color: var(--color-white); }
-        .hero-eyebrow { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 4px; color: var(--color-accent); margin-bottom: var(--space-sm); display: flex; align-items: center; gap: 0.75rem; }
-        .hero-eyebrow::before { content: ''; display: block; width: 32px; height: 2px; background: var(--color-accent); }
-        .hero h1 { color: var(--color-white); margin-bottom: var(--space-md); font-size: clamp(2.5rem, 5vw, 4.5rem); }
-        .hero h1 em { color: var(--color-accent); font-style: italic; }
-        .hero-subtitle { font-size: 1.15rem; color: rgba(255,255,255,0.75); margin-bottom: var(--space-lg); max-width: 480px; line-height: 1.7; }
-        .hero-buttons { display: flex; gap: var(--space-sm); flex-wrap: wrap; }
-        .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 1rem 2rem; font-family: var(--font-body); font-size: 1rem; font-weight: 600; text-decoration: none; border-radius: 4px; transition: all var(--transition-fast); cursor: pointer; border: none; }
-        .btn-primary { background-color: var(--color-accent); color: var(--color-primary); }
-        .btn-primary:hover { background-color: var(--color-accent-hover); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,162,39,0.4); }
-        .btn-secondary { background-color: transparent; color: var(--color-white); border: 2px solid rgba(255,255,255,0.35); }
-        .btn-secondary:hover { background-color: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.7); }
+  --r:  8px;  --r-lg: 16px;
+  --sh-sm:  0 2px 12px rgba(0,0,0,.06);
+  --sh-md:  0 8px 40px rgba(0,0,0,.10);
+  --sh-lg:  0 20px 80px rgba(0,0,0,.14);
+  --t:  .3s ease;  --ts: .55s ease;
+}
 
-        /* Paint swatch hero visual */
-        .hero-visual { position: relative; }
-        .paint-swatches { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 110px 130px 130px; gap: 6px; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-lg); }
-        .swatch { position: relative; overflow: hidden; }
-        .swatch-label { position: absolute; bottom: 10px; left: 12px; right: 12px; background: rgba(255,255,255,0.15); backdrop-filter: blur(4px); padding: 3px 8px; border-radius: 3px; font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: rgba(255,255,255,0.9); }
-        .swatch-wide { grid-column: span 2; }
-        .sw1 { background: linear-gradient(140deg, #f0ece3 0%, #d8d0c0 100%); }
-        .sw1 .swatch-label { color: rgba(0,0,0,0.5); background: rgba(0,0,0,0.07); }
-        .sw2 { background: linear-gradient(140deg, #6b9e72 0%, #4d7553 100%); }
-        .sw3 { background: linear-gradient(140deg, #b07050 0%, #8a5035 100%); }
-        .sw4 { background: linear-gradient(140deg, #5a7fa8 0%, #3a5f88 100%); }
-        .sw5 { background: linear-gradient(140deg, #1a1a2e 0%, #2a2a4e 100%); }
-        .swatch::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom right, rgba(255,255,255,0.07), transparent 60%); }
-        .hero-badge { position: absolute; top: -18px; right: -18px; width: 110px; height: 110px; background: var(--color-accent); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 8px 30px rgba(201,162,39,0.5); z-index: 2; transform: rotate(12deg); }
-        .hero-badge-text { font-family: var(--font-display); font-size: 0.75rem; font-weight: 700; color: var(--color-primary); text-align: center; line-height: 1.3; text-transform: uppercase; letter-spacing: 0.5px; }
-        .hero-stats { margin-top: var(--space-md); background: rgba(255,255,255,0.07); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); padding: var(--space-md); border-radius: var(--radius); display: flex; gap: var(--space-md); }
-        .stat { text-align: center; flex: 1; }
-        .stat-number { font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: var(--color-accent); line-height: 1; }
-        .stat-label { font-size: 0.75rem; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
-        .stat-divider { width: 1px; background: rgba(255,255,255,0.15); align-self: stretch; }
+/* ─── Reset ──────────────────────────────────────────────────── */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:var(--font-body);background:var(--cream);color:var(--text);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{text-decoration:none;color:inherit}
+ul{list-style:none}
+button{cursor:pointer;border:none;background:none;font-family:inherit}
 
-        /* ── Trust bar ─────────────────────────────────────────── */
-        .trust-bar { background-color: var(--color-white); padding: 1.25rem 0; border-bottom: 1px solid rgba(0,0,0,0.06); }
-        .trust-content { max-width: 1400px; margin: 0 auto; padding: 0 var(--space-md); display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap; gap: var(--space-md); }
-        .trust-item { display: flex; align-items: center; gap: 0.75rem; font-size: 0.9rem; font-weight: 500; color: var(--color-text); }
-        .trust-icon { width: 36px; height: 36px; background: var(--color-accent-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-        .trust-icon i { color: var(--color-accent); width: 16px; height: 16px; }
+/* ─── Type ───────────────────────────────────────────────────── */
+h1,h2,h3,h4{font-family:var(--font-display);line-height:1.15;color:var(--navy)}
+h1{font-size:clamp(2.8rem,6vw,5rem);font-weight:700}
+h2{font-size:clamp(2rem,4vw,3.2rem);font-weight:600}
+h3{font-size:clamp(1.15rem,2vw,1.45rem);font-weight:600}
+p{color:var(--text-mid);line-height:1.78}
 
-        /* ── Section base ──────────────────────────────────────── */
-        .section { padding: var(--space-2xl) 0; }
-        .section-header { text-align: center; max-width: 660px; margin: 0 auto var(--space-xl); }
-        .section-eyebrow { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 4px; color: var(--color-accent); margin-bottom: 0.75rem; display: flex; align-items: center; justify-content: center; gap: 0.75rem; }
-        .section-eyebrow::before, .section-eyebrow::after { content: ''; display: block; width: 24px; height: 2px; background: var(--color-accent); opacity: 0.6; }
-        .section-header h2 { margin-bottom: var(--space-sm); }
-        .section-header p { font-size: 1.1rem; }
+/* ─── Utility ────────────────────────────────────────────────── */
+.container{max-width:1280px;margin:0 auto;padding:0 var(--sp-md)}
+.section{padding:var(--sp-2xl) 0}
+.eyebrow{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:4px;color:var(--sienna);margin-bottom:1rem;display:flex;align-items:center;gap:.75rem}
+.eyebrow::before{content:'';width:28px;height:1.5px;background:var(--sienna);flex-shrink:0}
+.centered .eyebrow{justify-content:center}
+.section-sub{font-size:1.1rem;color:var(--text-light);max-width:540px;line-height:1.8}
+.centered .section-sub{margin:0 auto}
 
-        /* ── Services ──────────────────────────────────────────── */
-        .services { background-color: var(--color-cream); }
-        .services-grid { max-width: 1400px; margin: 0 auto; padding: 0 var(--space-md); display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-md); }
-        .service-card { background: var(--color-white); padding: var(--space-lg); border-radius: var(--radius); box-shadow: var(--shadow-sm); transition: all var(--transition-medium); border: 1px solid rgba(0,0,0,0.05); position: relative; overflow: hidden; }
-        .service-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--color-accent), var(--color-accent-hover)); transform: scaleX(0); transform-origin: left; transition: transform var(--transition-medium); }
-        .service-card:hover::before { transform: scaleX(1); }
-        .service-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); }
-        .service-icon { width: 56px; height: 56px; background: var(--color-accent-light); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--color-accent); margin-bottom: var(--space-md); transition: background var(--transition-fast); }
-        .service-card:hover .service-icon { background: var(--color-accent); color: var(--color-primary); }
-        .service-icon i { width: 26px; height: 26px; }
-        .service-card h3 { margin-bottom: var(--space-xs); }
-        .service-card p { margin-bottom: var(--space-sm); font-size: 0.95rem; }
-        .service-link { color: var(--color-accent); text-decoration: none; font-weight: 600; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 0.5rem; transition: gap var(--transition-fast); }
-        .service-link:hover { gap: 0.75rem; }
+/* ─── Reveal ─────────────────────────────────────────────────── */
+.rv  {opacity:0;transform:translateY(36px);transition:opacity .7s ease,transform .7s ease}
+.rvL {opacity:0;transform:translateX(-36px);transition:opacity .7s ease,transform .7s ease}
+.rvR {opacity:0;transform:translateX(36px);transition:opacity .7s ease,transform .7s ease}
+.rv.in,.rvL.in,.rvR.in{opacity:1;transform:none}
+.d1{transition-delay:.10s} .d2{transition-delay:.20s} .d3{transition-delay:.30s}
+.d4{transition-delay:.40s} .d5{transition-delay:.50s} .d6{transition-delay:.60s}
 
-        /* ── Process ───────────────────────────────────────────── */
-        .process { background-color: var(--color-white); }
-        .process-grid { max-width: 1400px; margin: 0 auto; padding: 0 var(--space-md); display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-md); position: relative; }
-        .process-connector { position: absolute; top: 40px; left: calc(12.5% + 20px); right: calc(12.5% + 20px); height: 2px; background: linear-gradient(90deg, var(--color-accent) 0%, rgba(201,162,39,0.2) 100%); }
-        .process-step { text-align: center; position: relative; }
-        .step-number { width: 80px; height: 80px; background: var(--color-cream); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 1.75rem; font-weight: 700; color: var(--color-accent); margin: 0 auto var(--space-md); border: 2px solid var(--color-accent); position: relative; z-index: 1; transition: all var(--transition-medium); }
-        .process-step:hover .step-number { background: var(--color-accent); color: var(--color-primary); }
-        .process-step h3 { margin-bottom: var(--space-xs); }
-        .process-step p { font-size: 0.9rem; }
+/* ─── Nav ────────────────────────────────────────────────────── */
+.nav{position:fixed;top:0;left:0;right:0;z-index:900;padding:1.5rem 0;transition:background .4s,box-shadow .4s,padding .4s}
+.nav.on{background:var(--white);box-shadow:0 1px 0 rgba(0,0,0,.07),var(--sh-sm);padding:1rem 0}
+.nav-row{display:flex;justify-content:space-between;align-items:center}
+.logo{font-family:var(--font-display);font-size:1.3rem;font-weight:700;color:var(--white);display:flex;align-items:center;gap:.6rem;transition:color var(--t)}
+.logo-mark{width:32px;height:32px;background:var(--sienna);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:800;color:var(--white);flex-shrink:0}
+.nav.on .logo{color:var(--navy)}
+.nav-links{display:flex;align-items:center;gap:2.5rem}
+.nl{font-size:.88rem;font-weight:600;color:rgba(255,255,255,.82);transition:color var(--t);position:relative;letter-spacing:.3px}
+.nl::after{content:'';position:absolute;bottom:-3px;left:0;right:0;height:1.5px;background:var(--sienna);transform:scaleX(0);transition:transform var(--t);transform-origin:left}
+.nl:hover{color:var(--white)} .nl:hover::after,.nl.cta::after{transform:scaleX(1)}
+.nav.on .nl{color:var(--text-mid)} .nav.on .nl:hover{color:var(--navy)}
+.nl.cta{background:var(--sienna);color:var(--white) !important;padding:.65rem 1.4rem;border-radius:var(--r);font-weight:700}
+.nl.cta::after{display:none}
+.nl.cta:hover{background:var(--sienna-dark);transform:translateY(-1px);box-shadow:0 6px 18px rgba(200,119,58,.4)}
+.hamburger{display:none;color:var(--white);padding:6px}
+.nav.on .hamburger{color:var(--navy)}
 
-        /* ── Work/Portfolio ────────────────────────────────────── */
-        .work { background-color: var(--color-primary); }
-        .work .section-header h2, .work .section-header p { color: var(--color-white); }
-        .work-grid { max-width: 1400px; margin: 0 auto; padding: 0 var(--space-md); display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; border-radius: var(--radius); overflow: hidden; }
-        .work-item { aspect-ratio: 4/3; border-radius: 4px; overflow: hidden; position: relative; cursor: pointer; }
-        .work-item-bg { position: absolute; inset: 0; transition: transform var(--transition-medium); }
-        .work-item:hover .work-item-bg { transform: scale(1.05); }
-        .wi-1 .work-item-bg { background: linear-gradient(135deg, #e8e0d5 0%, #b8b0a0 100%); }
-        .wi-2 .work-item-bg { background: linear-gradient(135deg, #4a7c59 0%, #2d5a3d 100%); }
-        .wi-3 .work-item-bg { background: linear-gradient(135deg, #d4a574 0%, #a07040 100%); }
-        .wi-4 .work-item-bg { background: linear-gradient(135deg, #5a7fa8 0%, #2d4f78 100%); }
-        .wi-5 .work-item-bg { background: linear-gradient(135deg, #c9a0c0 0%, #8a5080 100%); }
-        .wi-6 .work-item-bg { background: linear-gradient(135deg, #8a7060 0%, #5a4030 100%); }
-        .work-item-bg::after { content: ''; position: absolute; inset: 0; background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60"><path d="M0 30 Q15 20 30 30 Q45 40 60 30" stroke="rgba(255,255,255,0.06)" fill="none" stroke-width="1"/><path d="M0 10 Q15 0 30 10 Q45 20 60 10" stroke="rgba(255,255,255,0.06)" fill="none" stroke-width="1"/></svg>') repeat; }
-        .work-item-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,10,30,0.85) 0%, rgba(10,10,30,0.1) 50%, transparent 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: var(--space-md); opacity: 0; transition: opacity var(--transition-medium); }
-        .work-item:hover .work-item-overlay { opacity: 1; }
-        .work-item h4 { color: var(--color-white); font-size: 1.1rem; margin-bottom: 2px; }
-        .work-item p { color: rgba(255,255,255,0.75); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
-        .work-item-tag { position: absolute; top: 12px; left: 12px; background: rgba(201,162,39,0.9); color: var(--color-primary); font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 3px 10px; border-radius: 2px; opacity: 0; transition: opacity var(--transition-medium); }
-        .work-item:hover .work-item-tag { opacity: 1; }
+/* mobile menu */
+.mob{position:fixed;inset:0;z-index:850;background:var(--navy-dark);display:flex;flex-direction:column;padding:5.5rem var(--sp-md) var(--sp-md);transform:translateX(100%);transition:transform .4s cubic-bezier(.4,0,.2,1)}
+.mob.open{transform:none}
+.mob-link{font-family:var(--font-display);font-size:2rem;font-weight:600;color:rgba(255,255,255,.8);padding:1rem 0;border-bottom:1px solid rgba(255,255,255,.07);transition:color var(--t)}
+.mob-link:hover{color:var(--sienna)}
+.mob-cta{margin-top:2rem;background:var(--sienna);color:var(--white);padding:1.1rem;border-radius:var(--r);font-weight:700;font-size:1.1rem;text-align:center;display:block}
+.mob-x{position:absolute;top:1.4rem;right:1.4rem;color:rgba(255,255,255,.65);padding:8px}
 
-        /* ── CTA Band ──────────────────────────────────────────── */
-        .cta-band { background: linear-gradient(120deg, var(--color-accent) 0%, #e8b930 50%, var(--color-accent-hover) 100%); padding: var(--space-xl) 0; }
-        .cta-band-content { max-width: 1400px; margin: 0 auto; padding: 0 var(--space-md); display: flex; justify-content: space-between; align-items: center; gap: var(--space-md); flex-wrap: wrap; }
-        .cta-band h2 { color: var(--color-primary); font-size: clamp(1.5rem, 3vw, 2.25rem); margin-bottom: 0.5rem; }
-        .cta-band p { color: rgba(26,26,46,0.75); font-size: 1.1rem; }
-        .btn-dark { background-color: var(--color-primary); color: var(--color-white); padding: 1rem 2.5rem; font-size: 1rem; font-weight: 600; border-radius: 4px; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; transition: all var(--transition-fast); white-space: nowrap; }
-        .btn-dark:hover { background-color: #2a2a4e; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.25); }
+/* ─── Hero ───────────────────────────────────────────────────── */
+.hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;background:linear-gradient(145deg,#0D1B2A 0%,#1B2A4A 45%,#1e2f52 80%,#111D33 100%)}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 25% 45%,rgba(200,119,58,.07) 0%,transparent 55%),radial-gradient(ellipse at 78% 65%,rgba(200,119,58,.04) 0%,transparent 45%)}
+.hero::after{content:'';position:absolute;right:-8%;top:15%;width:58%;height:75%;background:radial-gradient(ellipse,rgba(255,255,255,.02) 0%,transparent 70%);border-radius:50% 50% 50% 50%/40% 40% 60% 60%;pointer-events:none}
+.hero-inner{position:relative;z-index:2;padding:8rem 0 6rem;max-width:830px}
+.hero-eyebrow{font-size:.72rem;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:var(--sienna);margin-bottom:1.5rem;display:flex;align-items:center;gap:1rem;opacity:0;animation:fup .8s ease .15s forwards}
+.hero-eyebrow::before{content:'';width:36px;height:1.5px;background:var(--sienna)}
+.hero h1{color:var(--white);font-size:clamp(3rem,7vw,5.5rem);line-height:1.08;letter-spacing:-.02em;margin-bottom:1.5rem}
+.hw{display:inline-block;opacity:0;transform:translateY(28px);animation:win .6s ease forwards}
+.hw.accent{color:var(--sienna);font-style:italic}
+.hero-sub{font-size:1.18rem;color:rgba(255,255,255,.65);margin-bottom:2.5rem;max-width:510px;line-height:1.75;opacity:0;animation:fup .8s ease 1.2s forwards}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;opacity:0;animation:fup .8s ease 1.5s forwards}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:1rem 2.2rem;border-radius:var(--r);font-family:var(--font-body);font-size:1rem;font-weight:700;transition:all var(--t);letter-spacing:.2px}
+.btn-p{background:var(--sienna);color:var(--white)}
+.btn-p:hover{background:var(--sienna-dark);transform:translateY(-2px);box-shadow:0 10px 30px rgba(200,119,58,.45)}
+.btn-g{background:transparent;color:var(--white);border:2px solid rgba(255,255,255,.32)}
+.btn-g:hover{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.65)}
+.hero-scroll{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;color:rgba(255,255,255,.3);font-size:.7rem;letter-spacing:2.5px;text-transform:uppercase;opacity:0;animation:fup .8s ease 2s forwards}
+.hero-scroll-bar{width:1px;height:40px;background:linear-gradient(to bottom,rgba(255,255,255,.32),transparent);animation:pulse-bar 2s ease-in-out infinite}
+@keyframes pulse-bar{0%,100%{opacity:1;transform:scaleY(1)}50%{opacity:.35;transform:scaleY(.5)}}
+@keyframes fup{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes win{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
 
-        /* ── Testimonials ──────────────────────────────────────── */
-        .testimonials { background-color: var(--color-cream-dark); }
-        .testimonials-aggregate { text-align: center; margin-bottom: var(--space-lg); }
-        .agg-stars { color: var(--color-accent); font-size: 1.75rem; letter-spacing: 4px; margin-bottom: 0.5rem; }
-        .agg-label { color: var(--color-text-light); font-size: 0.9rem; }
-        .testimonials-grid { max-width: 1400px; margin: 0 auto; padding: 0 var(--space-md); display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: var(--space-md); }
-        .testimonial-card { background: var(--color-white); padding: var(--space-lg); border-radius: var(--radius); box-shadow: var(--shadow-sm); border-left: 4px solid var(--color-accent); position: relative; overflow: hidden; }
-        .testimonial-quote-icon { position: absolute; top: var(--space-md); right: var(--space-md); font-size: 5rem; line-height: 1; color: rgba(201,162,39,0.08); font-family: Georgia, serif; pointer-events: none; }
-        .testimonial-stars { color: var(--color-accent); margin-bottom: var(--space-sm); font-size: 1rem; letter-spacing: 2px; }
-        .testimonial-text { font-family: var(--font-display); font-style: italic; font-size: 1.05rem; color: var(--color-text); margin-bottom: var(--space-md); line-height: 1.7; position: relative; z-index: 1; }
-        .testimonial-author { display: flex; align-items: center; gap: var(--space-sm); }
-        .author-avatar { width: 48px; height: 48px; background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--color-accent); font-weight: 700; font-size: 0.85rem; font-family: var(--font-display); flex-shrink: 0; }
-        .author-info h4 { font-size: 0.95rem; margin-bottom: 2px; }
-        .author-info p { font-size: 0.8rem; }
+/* ─── Trust Bar ──────────────────────────────────────────────── */
+.trust{background:var(--navy-dark);padding:1.35rem 0;border-top:1px solid rgba(255,255,255,.05)}
+.trust-row{display:flex;align-items:center;justify-content:center;flex-wrap:wrap}
+.ti{display:flex;align-items:center;gap:.6rem;padding:.4rem 2rem;font-size:.83rem;font-weight:600;color:rgba(255,255,255,.7);border-right:1px solid rgba(255,255,255,.09);letter-spacing:.3px}
+.ti:last-child{border-right:none}
+.ti i{color:var(--sienna);width:14px;height:14px}
 
-        /* ── Contact ───────────────────────────────────────────── */
-        .contact { background-color: var(--color-white); }
-        .contact-grid { max-width: 1400px; margin: 0 auto; padding: 0 var(--space-md); display: grid; grid-template-columns: 1fr 1.3fr; gap: var(--space-xl); align-items: start; }
-        .contact-info h3 { margin-bottom: var(--space-md); }
-        .contact-method { display: flex; align-items: flex-start; gap: var(--space-sm); margin-bottom: var(--space-md); }
-        .contact-method-icon { width: 44px; height: 44px; background: var(--color-accent-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-        .contact-method-icon i { width: 18px; height: 18px; color: var(--color-accent); }
-        .contact-method h4 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--color-text-light); margin-bottom: 4px; }
-        .contact-method a { color: var(--color-text); text-decoration: none; font-size: 1.1rem; font-weight: 500; font-family: var(--font-display); transition: color var(--transition-fast); }
-        .contact-method a:hover { color: var(--color-accent); }
-        .contact-method p { font-size: 1rem; color: var(--color-text); }
-        .contact-form { background: var(--color-cream); padding: var(--space-lg); border-radius: var(--radius); border: 1px solid rgba(0,0,0,0.05); }
-        .contact-form-title { font-family: var(--font-display); font-size: 1.35rem; font-weight: 600; color: var(--color-primary); margin-bottom: var(--space-md); }
-        .form-group { margin-bottom: 1.25rem; }
-        .form-group label { display: block; margin-bottom: 0.4rem; font-weight: 600; color: var(--color-primary); font-size: 0.9rem; }
-        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 0.875rem 1rem; border: 1.5px solid rgba(0,0,0,0.1); border-radius: 6px; font-family: var(--font-body); font-size: 0.95rem; background: var(--color-white); transition: border-color var(--transition-fast), box-shadow var(--transition-fast); color: var(--color-text); }
-        .form-group input:focus, .form-group textarea:focus, .form-group select:focus { outline: none; border-color: var(--color-accent); box-shadow: 0 0 0 3px rgba(201,162,39,0.12); }
-        .form-group textarea { min-height: 110px; resize: vertical; }
-        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-sm); }
+/* ─── Services ───────────────────────────────────────────────── */
+.services{background:var(--cream)}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;margin-top:var(--sp-lg)}
+.svc-card{background:var(--white);border-radius:var(--r-lg);padding:2.5rem;border:1px solid rgba(0,0,0,.055);position:relative;overflow:hidden;transition:transform var(--ts),box-shadow var(--ts)}
+.svc-card::before{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--sienna);transform:scaleX(0);transform-origin:left;transition:transform var(--ts)}
+.svc-card:hover{transform:translateY(-8px);box-shadow:var(--sh-md)}
+.svc-card:hover::before{transform:scaleX(1)}
+.svc-icon{width:52px;height:52px;background:var(--sienna-bg);border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:1.5rem;transition:background var(--t)}
+.svc-icon i{color:var(--sienna);width:22px;height:22px;transition:color var(--t)}
+.svc-card:hover .svc-icon{background:var(--sienna)}
+.svc-card:hover .svc-icon i{color:var(--white)}
+.svc-card h3{margin-bottom:.65rem;font-size:1.18rem}
+.svc-card p{font-size:.93rem;line-height:1.72}
+.svc-more{display:inline-flex;align-items:center;gap:.4rem;margin-top:1.2rem;font-size:.85rem;font-weight:700;color:var(--sienna);transition:gap var(--t)}
+.svc-card:hover .svc-more{gap:.7rem}
 
-        /* ── Footer ────────────────────────────────────────────── */
-        .footer { background-color: var(--color-primary); color: var(--color-white); padding: var(--space-xl) 0 var(--space-md); }
-        .footer-grid { max-width: 1400px; margin: 0 auto; padding: 0 var(--space-md); display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: var(--space-lg); margin-bottom: var(--space-lg); }
-        .footer-brand h3 { color: var(--color-white); font-size: 1.5rem; margin-bottom: var(--space-sm); display: flex; align-items: center; gap: 0.5rem; }
-        .footer-brand p { color: rgba(255,255,255,0.6); margin-bottom: var(--space-md); font-size: 0.95rem; }
-        .footer-social { display: flex; gap: 0.75rem; }
-        .footer-social a { width: 38px; height: 38px; background: rgba(255,255,255,0.08); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.7); transition: all var(--transition-fast); text-decoration: none; }
-        .footer-social a:hover { background: var(--color-accent); color: var(--color-primary); }
-        .footer-links h4 { color: var(--color-white); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: var(--space-sm); }
-        .footer-links ul { list-style: none; }
-        .footer-links li { margin-bottom: 0.6rem; }
-        .footer-links a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.9rem; transition: color var(--transition-fast); }
-        .footer-links a:hover { color: var(--color-accent); }
-        .footer-bottom { max-width: 1400px; margin: 0 auto; padding: var(--space-md) var(--space-md) 0; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--space-sm); }
-        .footer-bottom p { color: rgba(255,255,255,0.4); font-size: 0.85rem; }
+/* ─── Why ────────────────────────────────────────────────────── */
+.why{background:var(--white)}
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center}
+.why-title{font-size:clamp(2rem,4vw,3rem)}
+.bullets{margin-top:2rem;display:flex;flex-direction:column;gap:1.3rem}
+.bullet{display:flex;align-items:flex-start;gap:1rem}
+.b-check{width:22px;height:22px;min-width:22px;background:var(--sienna);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-top:3px}
+.b-check i{color:var(--white);width:11px;height:11px}
+.b-body h4{font-family:var(--font-body);font-size:.98rem;font-weight:700;color:var(--navy);margin-bottom:3px}
+.b-body p{font-size:.88rem;color:var(--text-light);line-height:1.55}
+.stats-quad{display:grid;grid-template-columns:1fr 1fr;gap:3px;border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-lg)}
+.sq{padding:3rem 2rem;text-align:center;position:relative;overflow:hidden}
+.sq::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.05),transparent)}
+.sq:nth-child(1){background:var(--navy)}
+.sq:nth-child(2){background:var(--sienna)}
+.sq:nth-child(3){background:var(--navy-light)}
+.sq:nth-child(4){background:var(--navy-dark)}
+.sq-num{font-family:var(--font-display);font-size:3.4rem;font-weight:800;color:var(--white);line-height:1;margin-bottom:.4rem}
+.sq-label{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,.6)}
 
-        /* ── Mobile menu ───────────────────────────────────────── */
-        .mobile-menu { position: fixed; top: 0; right: -100%; width: 100%; max-width: 360px; height: 100vh; background: var(--color-white); z-index: 1001; padding: var(--space-xl) var(--space-md); transition: right var(--transition-medium); box-shadow: var(--shadow-lg); overflow-y: auto; }
-        .mobile-menu.open { right: 0; }
-        .mobile-menu-close { position: absolute; top: var(--space-md); right: var(--space-md); background: none; border: none; cursor: pointer; color: var(--color-primary); padding: 8px; }
-        .mobile-menu-links { display: flex; flex-direction: column; gap: 0; margin-top: var(--space-xl); }
-        .mobile-menu-links a { font-size: 1.15rem; font-weight: 600; color: var(--color-primary); text-decoration: none; padding: 1rem 0; border-bottom: 1px solid rgba(0,0,0,0.07); display: flex; align-items: center; justify-content: space-between; }
-        .mobile-menu-links a:last-child { background: var(--color-accent); color: var(--color-primary); padding: 1rem 1.25rem; border-radius: 4px; margin-top: var(--space-sm); border-bottom: none; justify-content: center; }
-        .mobile-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; opacity: 0; visibility: hidden; transition: all var(--transition-medium); }
-        .mobile-overlay.open { opacity: 1; visibility: visible; }
+/* ─── Process ────────────────────────────────────────────────── */
+.process{background:var(--cream-dark)}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:var(--sp-lg);position:relative}
+.steps::before{content:'';position:absolute;top:36px;left:12.5%;right:12.5%;height:1.5px;background:linear-gradient(90deg,var(--sienna),rgba(200,119,58,.2));z-index:0}
+.step{text-align:center;position:relative;z-index:1;padding:0 1.25rem}
+.step-dot{width:72px;height:72px;background:var(--white);border:2.5px solid var(--sienna);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;font-family:var(--font-display);font-size:1.5rem;font-weight:700;color:var(--sienna);transition:all var(--ts);box-shadow:0 0 0 8px var(--cream-dark)}
+.step:hover .step-dot{background:var(--sienna);color:var(--white);transform:scale(1.08)}
+.step h3{font-size:1.05rem;margin-bottom:.6rem}
+.step p{font-size:.875rem;color:var(--text-light)}
 
-        /* ── Floating mobile CTA ───────────────────────────────── */
-        .float-cta { display: none; }
-        @media (max-width: 768px) {
-            .float-cta { display: flex; position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); z-index: 999; background: var(--color-accent); color: var(--color-primary); padding: 0.9rem 2rem; border-radius: 50px; font-weight: 700; font-family: var(--font-body); font-size: 1rem; text-decoration: none; box-shadow: 0 8px 30px rgba(201,162,39,0.5); align-items: center; gap: 0.5rem; white-space: nowrap; transition: opacity 0.3s ease; }
-        }
+/* ─── Portfolio ──────────────────────────────────────────────── */
+.portfolio{background:var(--navy)}
+.portfolio .eyebrow{color:rgba(200,119,58,.9)}
+.portfolio h2{color:var(--white)}
+.portfolio .section-sub{color:rgba(255,255,255,.5)}
+.p-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:var(--sp-lg);border-radius:var(--r-lg);overflow:hidden}
+.pi{border-radius:4px;overflow:hidden;position:relative;cursor:pointer;aspect-ratio:4/3}
+.pi:nth-child(1){grid-column:span 2;aspect-ratio:16/9}
+.pi-bg{position:absolute;inset:0;transition:transform .6s ease}
+.pi:hover .pi-bg{transform:scale(1.06)}
+.pi1 .pi-bg{background:linear-gradient(145deg,#D4C9B8,#A09080)}
+.pi2 .pi-bg{background:linear-gradient(145deg,#5B7F5E,#3C5A3F)}
+.pi3 .pi-bg{background:linear-gradient(145deg,#7A9DB5,#4D6F85)}
+.pi4 .pi-bg{background:linear-gradient(145deg,#C8A875,#9A7840)}
+.pi5 .pi-bg{background:linear-gradient(145deg,#AE8CAA,#7A5C76)}
+.pi6 .pi-bg{background:linear-gradient(145deg,#788A68,#506040)}
+.pi-bg::after{content:'';position:absolute;inset:0;background:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80"><line x1="0" y1="60" x2="80" y2="60" stroke="rgba(0,0,0,0.06)" stroke-width="1.5"/><rect x="15" y="20" width="50" height="35" rx="2" fill="rgba(0,0,0,0.05)"/></svg>') center/cover}
+.pi-over{position:absolute;inset:0;background:linear-gradient(to top,rgba(15,25,45,.88) 0%,rgba(15,25,45,.15) 55%,transparent);display:flex;flex-direction:column;justify-content:flex-end;padding:1.5rem;opacity:0;transition:opacity var(--ts)}
+.pi:hover .pi-over{opacity:1}
+.pi-over h4{color:var(--white);font-size:1.05rem;margin-bottom:3px}
+.pi-over p{color:rgba(255,255,255,.68);font-size:.77rem;text-transform:uppercase;letter-spacing:1px}
+.pi-badge{position:absolute;top:12px;left:12px;background:var(--sienna);color:var(--white);font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;padding:4px 10px;border-radius:3px;z-index:2}
+.p-cta{text-align:center;margin-top:3rem}
 
-        /* ── Responsive ────────────────────────────────────────── */
-        @media (max-width: 1024px) {
-            .hero-content { grid-template-columns: 1fr; text-align: center; padding-bottom: calc(var(--space-2xl) + 30px); }
-            .hero-text { order: 1; }
-            .hero-visual { order: 2; max-width: 500px; margin: 0 auto; }
-            .hero-eyebrow { justify-content: center; }
-            .hero-subtitle { margin-left: auto; margin-right: auto; }
-            .hero-buttons { justify-content: center; }
-            .process-grid { grid-template-columns: repeat(2, 1fr); }
-            .process-connector { display: none; }
-            .work-grid { grid-template-columns: repeat(2, 1fr); }
-            .contact-grid { grid-template-columns: 1fr; }
-            .footer-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .nav-toggle { display: block; }
-            .services-grid, .process-grid, .work-grid, .testimonials-grid { grid-template-columns: 1fr; }
-            .form-row { grid-template-columns: 1fr; }
-            .footer-grid { grid-template-columns: 1fr; text-align: center; }
-            .footer-social { justify-content: center; }
-            .footer-bottom { flex-direction: column; text-align: center; }
-            .cta-band-content { flex-direction: column; text-align: center; }
-        }
-        @media (max-width: 480px) {
-            .paint-swatches { grid-template-rows: 80px 100px 100px; }
-            .hero-stats { flex-direction: column; gap: var(--space-sm); }
-            .stat-divider { display: none; }
-        }
-    </style>
+/* ─── Testimonials ───────────────────────────────────────────── */
+.testimonials{background:var(--cream)}
+.t-wrap{position:relative;overflow:hidden;margin-top:var(--sp-lg)}
+.t-track{display:flex;transition:transform .55s cubic-bezier(.4,0,.2,1)}
+.t-slide{flex:0 0 100%;display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}
+.t-card{background:var(--white);border-radius:var(--r-lg);padding:2.5rem;box-shadow:var(--sh-sm);border:1px solid rgba(0,0,0,.05);position:relative;overflow:hidden}
+.t-card::before{content:'\201C';position:absolute;top:.8rem;right:1.4rem;font-family:var(--font-display);font-size:6rem;line-height:1;color:rgba(200,119,58,.07);pointer-events:none}
+.t-stars{color:var(--sienna);letter-spacing:2px;margin-bottom:1.2rem;font-size:1rem}
+.t-quote{font-family:var(--font-display);font-style:italic;font-size:1.03rem;color:var(--text);line-height:1.72;margin-bottom:1.5rem;position:relative;z-index:1}
+.t-author{display:flex;align-items:center;gap:.875rem}
+.t-avatar{width:46px;height:46px;background:linear-gradient(135deg,var(--navy),var(--navy-light));border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:700;color:var(--sienna);font-size:.88rem;flex-shrink:0}
+.t-name{font-weight:700;font-size:.93rem;color:var(--navy);margin-bottom:2px}
+.t-loc{font-size:.78rem;color:var(--text-light)}
+.car-ctrl{display:flex;justify-content:center;align-items:center;gap:1rem;margin-top:2rem}
+.car-btn{width:46px;height:46px;border-radius:50%;background:var(--white);border:2px solid rgba(0,0,0,.08);display:flex;align-items:center;justify-content:center;color:var(--navy);transition:all var(--t)}
+.car-btn:hover{background:var(--sienna);color:var(--white);border-color:var(--sienna)}
+.car-dots{display:flex;gap:.4rem}
+.car-dot{width:7px;height:7px;border-radius:50%;background:rgba(0,0,0,.15);transition:all var(--t);border:none;cursor:pointer}
+.car-dot.active{background:var(--sienna);width:22px;border-radius:4px}
+
+/* ─── About ──────────────────────────────────────────────────── */
+.about{background:var(--white)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center}
+.about-photo-wrap{position:relative}
+.about-photo{aspect-ratio:4/5;border-radius:var(--r-lg);background:linear-gradient(145deg,#C4B8A8,#95897A);position:relative;overflow:hidden}
+.about-photo::before{content:'';position:absolute;inset:0;background:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="220" height="280"><circle cx="110" cy="95" r="58" fill="rgba(0,0,0,0.07)"/><rect x="45" y="165" width="130" height="55" rx="5" fill="rgba(0,0,0,0.06)"/></svg>') center/cover}
+.about-accent{position:absolute;bottom:-22px;right:-22px;width:130px;height:130px;border:4px solid var(--sienna);border-radius:var(--r-lg);z-index:0;pointer-events:none}
+.about-badge{position:absolute;bottom:1.5rem;left:1.5rem;background:var(--sienna);color:var(--white);padding:.7rem 1.2rem;border-radius:var(--r);font-weight:700;font-size:.83rem;z-index:2}
+.about-text h2{font-size:clamp(1.8rem,3.5vw,2.8rem)}
+.about-text p{margin-bottom:1.2rem}
+.sig{font-family:var(--font-display);font-style:italic;font-weight:600;font-size:2.1rem;color:var(--sienna);margin:1.5rem 0 .2rem;line-height:1}
+.sig-title{font-size:.8rem;color:var(--text-light);font-weight:700;letter-spacing:1.5px;text-transform:uppercase}
+
+/* ─── Service Areas ──────────────────────────────────────────── */
+.areas{background:var(--cream-dark)}
+.areas-inner{text-align:center;max-width:820px;margin:0 auto}
+.pills{display:flex;flex-wrap:wrap;gap:.75rem;justify-content:center;margin-top:2.5rem}
+.pill{display:flex;align-items:center;gap:.5rem;background:var(--white);border:1.5px solid rgba(0,0,0,.07);padding:.6rem 1.25rem;border-radius:50px;font-size:.88rem;font-weight:600;color:var(--navy);transition:all var(--t)}
+.pill:hover{background:var(--sienna);color:var(--white);border-color:var(--sienna)}
+.pill i{color:var(--sienna);width:13px;height:13px;transition:color var(--t)}
+.pill:hover i{color:var(--white)}
+
+/* ─── FAQ ────────────────────────────────────────────────────── */
+.faq{background:var(--white)}
+.faq-list{max-width:820px;margin:var(--sp-lg) auto 0}
+.faq-item{border-bottom:1px solid rgba(0,0,0,.07)}
+.fq{display:flex;justify-content:space-between;align-items:center;width:100%;padding:1.5rem 0;font-family:var(--font-display);font-size:1.08rem;font-weight:600;color:var(--navy);text-align:left;transition:color var(--t)}
+.fq:hover{color:var(--sienna)}
+.fq-icon{width:32px;height:32px;min-width:32px;border:1.5px solid rgba(0,0,0,.12);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all var(--t);margin-left:1rem}
+.faq-item.open .fq-icon{background:var(--sienna);border-color:var(--sienna);transform:rotate(45deg)}
+.fq-icon i{width:13px;height:13px;color:var(--text-mid);transition:color var(--t)}
+.faq-item.open .fq-icon i{color:var(--white)}
+.fa-body{font-size:.95rem;color:var(--text-mid);line-height:1.82;max-height:0;overflow:hidden;transition:max-height .42s ease,padding .42s ease}
+.faq-item.open .fa-body{max-height:320px;padding-bottom:1.5rem}
+
+/* ─── Contact ────────────────────────────────────────────────── */
+.contact{background:var(--navy-dark)}
+.c-hero{text-align:center;max-width:700px;margin:0 auto;padding-bottom:var(--sp-lg);border-bottom:1px solid rgba(255,255,255,.07);margin-bottom:var(--sp-lg)}
+.c-hero h2{color:var(--white);font-size:clamp(2.2rem,5vw,4rem)}
+.c-hero h2 em{color:var(--sienna);font-style:italic}
+.c-phone{font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);font-weight:700;color:var(--sienna);display:block;margin:1rem 0;transition:color var(--t)}
+.c-phone:hover{color:var(--white)}
+.c-email{color:rgba(255,255,255,.45);font-size:.95rem}
+.c-email a{color:rgba(255,255,255,.62);transition:color var(--t)}
+.c-email a:hover{color:var(--sienna)}
+.c-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.c-info h3{color:var(--white);font-size:1.55rem;margin-bottom:1.5rem}
+.c-detail{display:flex;align-items:flex-start;gap:1rem;margin-bottom:1.5rem}
+.c-icon{width:42px;height:42px;background:rgba(200,119,58,.14);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.c-icon i{color:var(--sienna);width:17px;height:17px}
+.c-detail h4{color:rgba(255,255,255,.45);font-size:.72rem;text-transform:uppercase;letter-spacing:2.5px;font-family:var(--font-body);font-weight:700;margin-bottom:4px}
+.c-detail p,.c-detail a{color:rgba(255,255,255,.82);font-size:.98rem;font-weight:500;transition:color var(--t)}
+.c-detail a:hover{color:var(--sienna)}
+.c-form{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:var(--r-lg);padding:2.5rem}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.fg{margin-bottom:1.2rem}
+.fg label{display:block;color:rgba(255,255,255,.45);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:.45rem}
+.fg input,.fg select,.fg textarea{width:100%;padding:.875rem 1.1rem;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);border-radius:var(--r);color:var(--white);font-family:var(--font-body);font-size:.93rem;transition:border-color var(--t),background var(--t),box-shadow var(--t)}
+.fg input::placeholder,.fg textarea::placeholder{color:rgba(255,255,255,.22)}
+.fg input:focus,.fg select:focus,.fg textarea:focus{outline:none;border-color:var(--sienna);background:rgba(255,255,255,.08);box-shadow:0 0 0 3px rgba(200,119,58,.15)}
+.fg select option{background:var(--navy-dark);color:var(--white)}
+.fg textarea{min-height:120px;resize:vertical}
+.btn-sub{width:100%;padding:1.1rem;background:var(--sienna);color:var(--white);border-radius:var(--r);font-weight:700;font-size:1rem;letter-spacing:.3px;display:flex;align-items:center;justify-content:center;gap:.5rem;transition:all var(--t)}
+.btn-sub:hover{background:var(--sienna-dark);transform:translateY(-2px);box-shadow:0 8px 25px rgba(200,119,58,.4)}
+.form-ok{display:none;text-align:center;padding:3rem 1.5rem}
+.form-ok h3{color:var(--white);margin-bottom:.5rem}
+.form-ok p{color:rgba(255,255,255,.5)}
+
+/* ─── Footer ─────────────────────────────────────────────────── */
+.footer{background:var(--navy-dark);border-top:1px solid rgba(255,255,255,.06)}
+.ft-main{padding:var(--sp-xl) 0 var(--sp-lg);display:grid;grid-template-columns:2fr 1fr 1fr 1.4fr;gap:3rem}
+.ft-brand h3{font-family:var(--font-display);font-size:1.35rem;color:var(--white);margin-bottom:1rem;display:flex;align-items:center;gap:.7rem}
+.ft-brand p{font-size:.88rem;color:rgba(255,255,255,.42);line-height:1.72;max-width:270px;margin-bottom:1.5rem}
+.ft-socials{display:flex;gap:.7rem}
+.ft-soc{width:38px;height:38px;background:rgba(255,255,255,.07);border-radius:8px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.48);transition:all var(--t)}
+.ft-soc:hover{background:var(--sienna);color:var(--white)}
+.ft-soc i{width:15px;height:15px}
+.ft-col h4{color:rgba(255,255,255,.32);font-family:var(--font-body);font-size:.7rem;text-transform:uppercase;letter-spacing:3px;font-weight:700;margin-bottom:1.2rem}
+.ft-col ul{display:flex;flex-direction:column;gap:.55rem}
+.ft-col a{color:rgba(255,255,255,.52);font-size:.88rem;transition:color var(--t)}
+.ft-col a:hover{color:var(--sienna)}
+.ft-bottom{border-top:1px solid rgba(255,255,255,.06);padding:1.4rem 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.ft-bottom p{color:rgba(255,255,255,.28);font-size:.82rem}
+.ft-badges{display:flex;gap:1.2rem}
+.ft-badge{font-size:.72rem;font-weight:700;color:rgba(255,255,255,.28);display:flex;align-items:center;gap:.4rem}
+.ft-badge i{color:var(--sienna);width:11px;height:11px}
+
+/* ─── Responsive ─────────────────────────────────────────────── */
+@media(max-width:1024px){
+  .svc-grid{grid-template-columns:repeat(2,1fr)}
+  .why-grid,.about-grid{grid-template-columns:1fr;gap:3rem}
+  .stats-quad{max-width:480px}
+  .steps{grid-template-columns:repeat(2,1fr);gap:2rem}
+  .steps::before{display:none}
+  .p-grid{grid-template-columns:repeat(2,1fr)}
+  .pi:nth-child(1){grid-column:span 2;aspect-ratio:16/9}
+  .c-grid{grid-template-columns:1fr}
+  .ft-main{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:768px){
+  :root{--sp-2xl:5rem;--sp-xl:4rem}
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .svc-grid,.steps,.p-grid,.t-slide{grid-template-columns:1fr}
+  .pi:nth-child(1){grid-column:span 1;aspect-ratio:4/3}
+  .trust-row{flex-direction:column;align-items:flex-start;padding:0 var(--sp-md)}
+  .ti{border-right:none;border-bottom:1px solid rgba(255,255,255,.07);padding:.5rem 0}
+  .ti:last-child{border-bottom:none}
+  .stats-quad{grid-template-columns:1fr 1fr}
+  .form-row{grid-template-columns:1fr}
+  .ft-main{grid-template-columns:1fr;gap:2rem}
+  .ft-bottom{flex-direction:column;text-align:center}
+}
+@media(max-width:480px){
+  .hero h1{font-size:2.8rem}
+  .hero-btns{flex-direction:column}
+  .hero-btns .btn{justify-content:center}
+  .stats-quad{grid-template-columns:1fr}
+}
+</style>
 </head>
 <body>
 
-    <!-- Navigation -->
-    <nav class="nav" id="nav">
-        <div class="nav-container">
-            <a href="#" class="nav-logo">
-                <span class="nav-logo-dot"></span>
-                {{BUSINESS_NAME}}
-            </a>
-            <div class="nav-links">
-                <a href="#services" class="nav-link">Services</a>
-                <a href="#work" class="nav-link">Our Work</a>
-                <a href="#process" class="nav-link">Process</a>
-                <a href="#testimonials" class="nav-link">Reviews</a>
-                <a href="#contact" class="nav-cta">Get a Quote</a>
-            </div>
-            <button class="nav-toggle" id="navToggle" aria-label="Open menu"><i data-lucide="menu"></i></button>
-        </div>
-    </nav>
-
-    <div class="mobile-overlay" id="mobileOverlay"></div>
-    <div class="mobile-menu" id="mobileMenu">
-        <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close menu"><i data-lucide="x" style="width:24px;height:24px;"></i></button>
-        <div class="mobile-menu-links">
-            <a href="#services">Services <i data-lucide="chevron-right" style="width:16px;height:16px;opacity:0.4"></i></a>
-            <a href="#work">Our Work <i data-lucide="chevron-right" style="width:16px;height:16px;opacity:0.4"></i></a>
-            <a href="#process">Process <i data-lucide="chevron-right" style="width:16px;height:16px;opacity:0.4"></i></a>
-            <a href="#testimonials">Reviews <i data-lucide="chevron-right" style="width:16px;height:16px;opacity:0.4"></i></a>
-            <a href="#contact">Get a Free Quote</a>
-        </div>
+<!-- ─── NAV ─────────────────────────────────────────────── -->
+<nav class="nav" id="nav" role="navigation" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav-row">
+      <a href="#home" class="logo" aria-label="{{BUSINESS_NAME}} home">
+        <span class="logo-mark" aria-hidden="true">S</span>
+        {{BUSINESS_NAME}}
+      </a>
+      <div class="nav-links" role="list">
+        <a href="#services" class="nl" role="listitem">Services</a>
+        <a href="#portfolio" class="nl" role="listitem">Our Work</a>
+        <a href="#about" class="nl" role="listitem">About</a>
+        <a href="#faq" class="nl" role="listitem">FAQ</a>
+        <a href="#contact" class="nl cta" role="listitem">Get a Quote</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mob">
+        <i data-lucide="menu" style="width:24px;height:24px;"></i>
+      </button>
     </div>
+  </div>
+</nav>
 
-    <!-- Floating Mobile CTA -->
-    <a href="tel:{{PHONE}}" class="float-cta" id="floatCta">
-        <i data-lucide="phone" style="width:18px;height:18px;"></i> Call for Free Quote
-    </a>
+<!-- ─── MOBILE NAV ──────────────────────────────────────── -->
+<div class="mob" id="mob" role="dialog" aria-modal="true" aria-label="Navigation menu">
+  <button class="mob-x" id="mobClose" aria-label="Close navigation menu">
+    <i data-lucide="x" style="width:28px;height:28px;color:rgba(255,255,255,0.7)"></i>
+  </button>
+  <a href="#services" class="mob-link">Services</a>
+  <a href="#portfolio" class="mob-link">Our Work</a>
+  <a href="#about" class="mob-link">About</a>
+  <a href="#faq" class="mob-link">FAQ</a>
+  <a href="#contact" class="mob-cta">Get a Free Quote</a>
+</div>
 
-    <!-- Hero -->
-    <section class="hero">
-        <div class="hero-content">
-            <div class="hero-text">
-                <p class="hero-eyebrow">{{CITY}}'s Premier Painters</p>
-                <h1>Premium Painting.<br><em>Flawless</em> Finish.</h1>
-                <p class="hero-subtitle">Transform your home or business with meticulous craftsmanship and premium materials. Licensed, insured, and committed to excellence on every project.</p>
-                <div class="hero-buttons">
-                    <a href="#contact" class="btn btn-primary"><i data-lucide="calendar"></i>Get a Free Quote</a>
-                    <a href="#work" class="btn btn-secondary"><i data-lucide="images"></i>View Our Work</a>
-                </div>
+<!-- ─── HERO ─────────────────────────────────────────────── -->
+<section class="hero" id="home" aria-label="Hero">
+  <div class="container">
+    <div class="hero-inner">
+      <p class="hero-eyebrow">{{CITY}}'s Premier Painters</p>
+      <h1>
+        <span class="hw" style="animation-delay:.4s">Premium</span>
+        <span class="hw accent" style="animation-delay:.62s">&nbsp;Painting.</span><br>
+        <span class="hw" style="animation-delay:.95s">Flawless</span>
+        <span class="hw" style="animation-delay:1.18s">&nbsp;Finish.</span>
+      </h1>
+      <p class="hero-sub">Premium painting for discerning homeowners and businesses across {{CITY}} — where craftsmanship meets precision and every detail matters.</p>
+      <div class="hero-btns">
+        <a href="#contact" class="btn btn-p">
+          <i data-lucide="calendar" style="width:17px;height:17px;"></i>
+          Get a Free Quote
+        </a>
+        <a href="#portfolio" class="btn btn-g">
+          <i data-lucide="images" style="width:17px;height:17px;"></i>
+          View Our Work
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll" aria-hidden="true">
+    <div class="hero-scroll-bar"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- ─── TRUST BAR ────────────────────────────────────────── -->
+<div class="trust" role="complementary" aria-label="Trust indicators">
+  <div class="container">
+    <div class="trust-row">
+      <div class="ti"><i data-lucide="shield-check"></i>Licensed &amp; Insured</div>
+      <div class="ti"><i data-lucide="home"></i>500+ Projects Completed</div>
+      <div class="ti"><i data-lucide="star"></i>5-Star Rated</div>
+      <div class="ti"><i data-lucide="tag"></i>Free Estimates</div>
+      <div class="ti"><i data-lucide="clock"></i>On-Time Guarantee</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── SERVICES ──────────────────────────────────────────── -->
+<section class="section services" id="services" aria-label="Services">
+  <div class="container">
+    <div class="rv">
+      <p class="eyebrow">What We Do</p>
+      <h2>Comprehensive Painting<br>Services</h2>
+      <p class="section-sub" style="margin-top:.75rem">From a single-room refresh to full commercial buildouts — every project receives our full attention and premium-grade materials.</p>
+    </div>
+    <div class="svc-grid">
+      <div class="svc-card rv d1">
+        <div class="svc-icon"><i data-lucide="home"></i></div>
+        <h3>Interior Painting</h3>
+        <p>Walls, ceilings, trim, and specialty finishes — we transform interiors with precision prep work and flawless application, every time.</p>
+        <span class="svc-more">Learn More <i data-lucide="arrow-right" style="width:13px;height:13px;"></i></span>
+      </div>
+      <div class="svc-card rv d2">
+        <div class="svc-icon"><i data-lucide="building-2"></i></div>
+        <h3>Exterior Painting</h3>
+        <p>Boost curb appeal and protect your investment with weather-resistant premium coatings and expert surface preparation.</p>
+        <span class="svc-more">Learn More <i data-lucide="arrow-right" style="width:13px;height:13px;"></i></span>
+      </div>
+      <div class="svc-card rv d3">
+        <div class="svc-icon"><i data-lucide="store"></i></div>
+        <h3>Commercial Painting</h3>
+        <p>Minimal disruption, maximum quality. We work around your schedule for offices, retail, and multi-unit commercial properties.</p>
+        <span class="svc-more">Learn More <i data-lucide="arrow-right" style="width:13px;height:13px;"></i></span>
+      </div>
+      <div class="svc-card rv d1">
+        <div class="svc-icon"><i data-lucide="layout-panel-left"></i></div>
+        <h3>Cabinet Refinishing</h3>
+        <p>A full kitchen or bath transformation without replacement costs. Expert spray technique delivers a factory-quality finish.</p>
+        <span class="svc-more">Learn More <i data-lucide="arrow-right" style="width:13px;height:13px;"></i></span>
+      </div>
+      <div class="svc-card rv d2">
+        <div class="svc-icon"><i data-lucide="trees"></i></div>
+        <h3>Deck Staining</h3>
+        <p>Restore and protect your outdoor living spaces with premium stains and sealers engineered for New England's demanding climate.</p>
+        <span class="svc-more">Learn More <i data-lucide="arrow-right" style="width:13px;height:13px;"></i></span>
+      </div>
+      <div class="svc-card rv d3">
+        <div class="svc-icon"><i data-lucide="palette"></i></div>
+        <h3>Color Consultation</h3>
+        <p>Not sure what color? Our expert consultants guide you through palette selection to achieve the exact look you envision.</p>
+        <span class="svc-more">Learn More <i data-lucide="arrow-right" style="width:13px;height:13px;"></i></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── WHY ───────────────────────────────────────────────── -->
+<section class="section why" id="why" aria-label="Why choose us">
+  <div class="container">
+    <div class="why-grid">
+      <div class="rvL">
+        <p class="eyebrow">Why {{BUSINESS_NAME}}</p>
+        <h2 class="why-title">The Difference<br>Is in the Details</h2>
+        <div class="bullets">
+          <div class="bullet">
+            <div class="b-check"><i data-lucide="check"></i></div>
+            <div class="b-body">
+              <h4>Meticulous Surface Preparation</h4>
+              <p>We never skip prep. Every surface is cleaned, sanded, and primed before a single drop of paint is applied.</p>
             </div>
-            <div class="hero-visual">
-                <div style="position:relative">
-                    <div class="paint-swatches">
-                        <div class="swatch swatch-wide sw1"><span class="swatch-label">Classic White &amp; Cream</span></div>
-                        <div class="swatch sw2"><span class="swatch-label">Sage Garden</span></div>
-                        <div class="swatch sw3"><span class="swatch-label">Terracotta Dusk</span></div>
-                        <div class="swatch sw4"><span class="swatch-label">Harbor Blue</span></div>
-                        <div class="swatch sw5"><span class="swatch-label">Midnight Navy</span></div>
-                    </div>
-                    <div class="hero-badge">
-                        <span class="hero-badge-text">Premium<br>Quality<br>Finish</span>
-                    </div>
-                </div>
-                <div class="hero-stats">
-                    <div class="stat">
-                        <div class="stat-number" data-target="15">0</div>
-                        <div class="stat-label">Years Experience</div>
-                    </div>
-                    <div class="stat-divider"></div>
-                    <div class="stat">
-                        <div class="stat-number" data-target="500">0</div>
-                        <div class="stat-label">Projects Done</div>
-                    </div>
-                    <div class="stat-divider"></div>
-                    <div class="stat">
-                        <div class="stat-number" data-target="98">0</div>
-                        <div class="stat-label">% Satisfaction</div>
-                    </div>
-                </div>
+          </div>
+          <div class="bullet">
+            <div class="b-check"><i data-lucide="check"></i></div>
+            <div class="b-body">
+              <h4>Premium Paints &amp; Materials Only</h4>
+              <p>We use Benjamin Moore and Sherwin-Williams professional-grade lines exclusively — never builder or big-box paints.</p>
             </div>
+          </div>
+          <div class="bullet">
+            <div class="b-check"><i data-lucide="check"></i></div>
+            <div class="b-body">
+              <h4>Clean Job Sites, Every Single Day</h4>
+              <p>Your home is treated with respect. We protect surfaces, clean up daily, and leave no trace behind.</p>
+            </div>
+          </div>
+          <div class="bullet">
+            <div class="b-check"><i data-lucide="check"></i></div>
+            <div class="b-body">
+              <h4>Written Guarantee on All Work</h4>
+              <p>Every {{BUSINESS_NAME}} project is backed by a 2-year craftsmanship guarantee. We stand behind every brushstroke, period.</p>
+            </div>
+          </div>
         </div>
-    </section>
-
-    <!-- Trust Bar -->
-    <section class="trust-bar">
-        <div class="trust-content">
-            <div class="trust-item reveal">
-                <div class="trust-icon"><i data-lucide="shield-check"></i></div>
-                <span>Fully Licensed &amp; Insured</span>
-            </div>
-            <div class="trust-item reveal reveal-delay-1">
-                <div class="trust-icon"><i data-lucide="star"></i></div>
-                <span>5-Star Rated Service</span>
-            </div>
-            <div class="trust-item reveal reveal-delay-2">
-                <div class="trust-icon"><i data-lucide="clock"></i></div>
-                <span>On-Time, Every Time</span>
-            </div>
-            <div class="trust-item reveal reveal-delay-3">
-                <div class="trust-icon"><i data-lucide="badge-check"></i></div>
-                <span>Satisfaction Guaranteed</span>
-            </div>
+      </div>
+      <div class="rvR">
+        <div class="stats-quad">
+          <div class="sq">
+            <div class="sq-num">15+</div>
+            <div class="sq-label">Years Experience</div>
+          </div>
+          <div class="sq">
+            <div class="sq-num">500+</div>
+            <div class="sq-label">Homes Completed</div>
+          </div>
+          <div class="sq">
+            <div class="sq-num">100%</div>
+            <div class="sq-label">Satisfaction Rate</div>
+          </div>
+          <div class="sq">
+            <div class="sq-num">2yr</div>
+            <div class="sq-label">Craftsmanship Warranty</div>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- Services -->
-    <section class="section services" id="services">
-        <div class="section-header reveal">
-            <p class="section-eyebrow">What We Do</p>
-            <h2>Comprehensive Painting Services</h2>
-            <p>From single rooms to entire commercial properties, we deliver exceptional results with meticulous attention to detail.</p>
+<!-- ─── PROCESS ───────────────────────────────────────────── -->
+<section class="section process" id="process" aria-label="Our process">
+  <div class="container">
+    <div class="rv centered" style="text-align:center;max-width:600px;margin:0 auto">
+      <p class="eyebrow">How It Works</p>
+      <h2>Our Four-Step Process</h2>
+      <p class="section-sub" style="margin-top:.75rem">Every {{BUSINESS_NAME}} project follows the same proven process — no shortcuts, no surprises, no exceptions.</p>
+    </div>
+    <div class="steps">
+      <div class="step rv d1">
+        <div class="step-dot">1</div>
+        <h3>Free Estimate</h3>
+        <p>We assess your project, discuss your vision, and deliver a detailed written quote — no pressure, no obligation.</p>
+      </div>
+      <div class="step rv d2">
+        <div class="step-dot">2</div>
+        <h3>Color Consultation</h3>
+        <p>Our color expert guides you to the perfect palette with samples, swatches, and digital previews.</p>
+      </div>
+      <div class="step rv d3">
+        <div class="step-dot">3</div>
+        <h3>Professional Prep</h3>
+        <p>We protect your space, repair surfaces, prime every area, and tape with the care your home deserves.</p>
+      </div>
+      <div class="step rv d4">
+        <div class="step-dot">4</div>
+        <h3>Flawless Finish</h3>
+        <p>Premium paint, expert technique, thorough walkthrough, spotless cleanup — every single time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PORTFOLIO ─────────────────────────────────────────── -->
+<section class="section portfolio" id="portfolio" aria-label="Portfolio">
+  <div class="container">
+    <div class="rv">
+      <p class="eyebrow">Our Work</p>
+      <h2>Recent Projects</h2>
+      <p class="section-sub" style="margin-top:.75rem">A look at some of our recent transformations across {{CITY}} — each one a testament to what meticulous craftsmanship looks like.</p>
+    </div>
+    <div class="p-grid rv">
+      <div class="pi pi1">
+        <div class="pi-bg"></div>
+        <span class="pi-badge">Before &amp; After</span>
+        <div class="pi-over"><h4>Cambridge Victorian</h4><p>Full Exterior Restoration</p></div>
+      </div>
+      <div class="pi pi2">
+        <div class="pi-bg"></div>
+        <div class="pi-over"><h4>Beacon Hill Townhouse</h4><p>Interior — 4 Floors</p></div>
+      </div>
+      <div class="pi pi3">
+        <div class="pi-bg"></div>
+        <div class="pi-over"><h4>Wellesley Kitchen</h4><p>Cabinet Refinishing</p></div>
+      </div>
+      <div class="pi pi4">
+        <div class="pi-bg"></div>
+        <span class="pi-badge">Before &amp; After</span>
+        <div class="pi-over"><h4>Newton Office Suite</h4><p>Commercial Interior</p></div>
+      </div>
+      <div class="pi pi5">
+        <div class="pi-bg"></div>
+        <div class="pi-over"><h4>Lexington Colonial</h4><p>Full Exterior</p></div>
+      </div>
+      <div class="pi pi6">
+        <div class="pi-bg"></div>
+        <div class="pi-over"><h4>Brookline Master Suite</h4><p>Interior Painting</p></div>
+      </div>
+    </div>
+    <div class="p-cta rv">
+      <a href="#contact" class="btn btn-p">Start Your Project</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TESTIMONIALS ──────────────────────────────────────── -->
+<section class="section testimonials" id="testimonials" aria-label="Testimonials">
+  <div class="container">
+    <div class="rv centered" style="text-align:center;max-width:540px;margin:0 auto var(--sp-lg)">
+      <p class="eyebrow">Testimonials</p>
+      <h2>What Our Clients Say</h2>
+    </div>
+    <div class="t-wrap rv" role="region" aria-label="Testimonial carousel" aria-live="polite">
+      <div class="t-track" id="tTrack">
+        <div class="t-slide" aria-label="Testimonials 1 of 2">
+          <div class="t-card">
+            <div class="t-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="t-quote">"{{OWNER_FIRST}} and his team painted the entire exterior of our 100-year-old Victorian. The prep work alone was extraordinary — they treated every detail like it was their own home."</p>
+            <div class="t-author">
+              <div class="t-avatar" aria-hidden="true">EL</div>
+              <div><div class="t-name">Eleanor &amp; Robert Larkin</div><div class="t-loc">Cambridge, MA</div></div>
+            </div>
+          </div>
+          <div class="t-card">
+            <div class="t-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="t-quote">"I've had painters before who were good. {{BUSINESS_NAME}} Painting is in a completely different league. The finish on our cabinets is absolutely flawless — better than brand new."</p>
+            <div class="t-author">
+              <div class="t-avatar" aria-hidden="true">DM</div>
+              <div><div class="t-name">David Marchetti</div><div class="t-loc">Wellesley, MA</div></div>
+            </div>
+          </div>
+          <div class="t-card">
+            <div class="t-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="t-quote">"Hired {{BUSINESS_NAME}} for our office renovation — 4,000 sq ft on a tight deadline. Finished two days early, left the space spotless, and the work is impeccable."</p>
+            <div class="t-author">
+              <div class="t-avatar" aria-hidden="true">JK</div>
+              <div><div class="t-name">Jennifer Kim</div><div class="t-loc">Newton, MA</div></div>
+            </div>
+          </div>
         </div>
-        <div class="services-grid">
-            <div class="service-card reveal">
-                <div class="service-icon"><i data-lucide="home"></i></div>
-                <h3>Interior Painting</h3>
-                <p>Transform your living spaces with premium interior painting. We handle walls, ceilings, trim, and specialty finishes with precision.</p>
-                <a href="#contact" class="service-link">Get a Quote <i data-lucide="arrow-right"></i></a>
+        <div class="t-slide" aria-label="Testimonials 2 of 2">
+          <div class="t-card">
+            <div class="t-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="t-quote">"The color consultation alone was worth it. They helped us choose a palette we never would have found on our own. The result transformed our home completely."</p>
+            <div class="t-author">
+              <div class="t-avatar" aria-hidden="true">SA</div>
+              <div><div class="t-name">Sarah &amp; Tom Abbott</div><div class="t-loc">Lexington, MA</div></div>
             </div>
-            <div class="service-card reveal reveal-delay-1">
-                <div class="service-icon"><i data-lucide="building-2"></i></div>
-                <h3>Exterior Painting</h3>
-                <p>Boost curb appeal and protect your investment with our durable exterior painting services using weather-resistant premium coatings.</p>
-                <a href="#contact" class="service-link">Get a Quote <i data-lucide="arrow-right"></i></a>
+          </div>
+          <div class="t-card">
+            <div class="t-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="t-quote">"Attention to detail is an understatement. They caught issues with our trim we didn't even know existed and fixed them before painting. True craftsmen."</p>
+            <div class="t-author">
+              <div class="t-avatar" aria-hidden="true">MO</div>
+              <div><div class="t-name">Mark O'Brien</div><div class="t-loc">Brookline, MA</div></div>
             </div>
-            <div class="service-card reveal reveal-delay-2">
-                <div class="service-icon"><i data-lucide="layout-panel-left"></i></div>
-                <h3>Cabinet Refinishing</h3>
-                <p>Give your kitchen or bathroom a stunning makeover without the cost of replacement. Expert cabinet painting and refinishing.</p>
-                <a href="#contact" class="service-link">Get a Quote <i data-lucide="arrow-right"></i></a>
+          </div>
+          <div class="t-card">
+            <div class="t-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="t-quote">"We've used {{BUSINESS_NAME}} three times now. Every single time: on budget, on time, and exceptional quality. They're the only painters we'll ever call."</p>
+            <div class="t-author">
+              <div class="t-avatar" aria-hidden="true">CP</div>
+              <div><div class="t-name">Carla &amp; Pete Russo</div><div class="t-loc">Needham, MA</div></div>
             </div>
-            <div class="service-card reveal reveal-delay-3">
-                <div class="service-icon"><i data-lucide="store"></i></div>
-                <h3>Commercial Painting</h3>
-                <p>Professional painting for offices, retail spaces, and commercial properties. Minimal disruption to your business operations.</p>
-                <a href="#contact" class="service-link">Get a Quote <i data-lucide="arrow-right"></i></a>
-            </div>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+    <div class="car-ctrl" role="group" aria-label="Carousel controls">
+      <button class="car-btn" id="cPrev" aria-label="Previous testimonials"><i data-lucide="chevron-left" style="width:18px;height:18px;"></i></button>
+      <div class="car-dots" role="tablist">
+        <button class="car-dot active" data-i="0" role="tab" aria-selected="true" aria-label="Testimonials page 1"></button>
+        <button class="car-dot" data-i="1" role="tab" aria-selected="false" aria-label="Testimonials page 2"></button>
+      </div>
+      <button class="car-btn" id="cNext" aria-label="Next testimonials"><i data-lucide="chevron-right" style="width:18px;height:18px;"></i></button>
+    </div>
+  </div>
+</section>
 
-    <!-- Process -->
-    <section class="section process" id="process">
-        <div class="section-header reveal">
-            <p class="section-eyebrow">How It Works</p>
-            <h2>Our Proven Process</h2>
-            <p>We follow a meticulous, time-tested process to ensure flawless results on every single project.</p>
+<!-- ─── ABOUT ─────────────────────────────────────────────── -->
+<section class="section about" id="about" aria-label="About {{BUSINESS_NAME}}">
+  <div class="container">
+    <div class="about-grid">
+      <div class="rvL">
+        <div class="about-photo-wrap">
+          <div class="about-photo" role="img" aria-label="{{OWNER_FIRST}} {{BUSINESS_NAME}}, owner of {{BUSINESS_NAME}}"></div>
+          <div class="about-accent" aria-hidden="true"></div>
+          <div class="about-badge">&#9733;&nbsp; 15 Years in {{CITY}}</div>
         </div>
-        <div class="process-grid">
-            <div class="process-connector"></div>
-            <div class="process-step reveal">
-                <div class="step-number">01</div>
-                <h3>Consultation</h3>
-                <p>We discuss your vision, assess your space, and provide a detailed, no-obligation quote.</p>
-            </div>
-            <div class="process-step reveal reveal-delay-1">
-                <div class="step-number">02</div>
-                <h3>Preparation</h3>
-                <p>Thorough surface prep including cleaning, sanding, patching, and priming for lasting results.</p>
-            </div>
-            <div class="process-step reveal reveal-delay-2">
-                <div class="step-number">03</div>
-                <h3>Precision Painting</h3>
-                <p>Expert application using premium paints and proven techniques for a truly flawless finish.</p>
-            </div>
-            <div class="process-step reveal reveal-delay-3">
-                <div class="step-number">04</div>
-                <h3>Final Walkthrough</h3>
-                <p>We inspect every detail together and ensure your complete satisfaction before we leave.</p>
-            </div>
+      </div>
+      <div class="about-text rvR">
+        <p class="eyebrow">Our Story</p>
+        <h2>Built on a Promise:<br>No Shortcuts.</h2>
+        <p>{{BUSINESS_NAME}} was founded on a simple belief — that your home deserves the same care and precision a craftsman gives his own. What started as a one-man operation in 2009 has grown into {{CITY}}'s most trusted residential and commercial painting team.</p>
+        <p>We haven't changed our standards. Every job still gets the same personal attention, the same premium materials, and the same thorough final walkthrough. That's the {{BUSINESS_NAME}} promise — and it's why our clients come back year after year.</p>
+        <p>When you hire {{BUSINESS_NAME}}, you're not hiring a faceless crew. You're hiring a team that takes personal pride in every single brushstroke.</p>
+        <div class="sig">{{OWNER_FIRST}} {{BUSINESS_NAME}}</div>
+        <div class="sig-title">Founder &amp; Master Painter, {{BUSINESS_NAME}}</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SERVICE AREAS ─────────────────────────────────────── -->
+<section class="section areas" id="areas" aria-label="Service areas">
+  <div class="container">
+    <div class="areas-inner rv">
+      <p class="eyebrow" style="justify-content:center">Where We Work</p>
+      <h2>Serving {{CITY}} &amp; Beyond</h2>
+      <p class="section-sub" style="margin:.75rem auto 0">Our crews serve the following communities and all surrounding areas in Eastern Massachusetts.</p>
+      <div class="pills" role="list">
+        <span class="pill" role="listitem"><i data-lucide="map-pin"></i>{{CITY}}</span>
+        <span class="pill" role="listitem"><i data-lucide="map-pin"></i>Cambridge</span>
+        <span class="pill" role="listitem"><i data-lucide="map-pin"></i>Brookline</span>
+        <span class="pill" role="listitem"><i data-lucide="map-pin"></i>Newton</span>
+        <span class="pill" role="listitem"><i data-lucide="map-pin"></i>Wellesley</span>
+        <span class="pill" role="listitem"><i data-lucide="map-pin"></i>Lexington</span>
+        <span class="pill" role="listitem"><i data-lucide="map-pin"></i>Needham</span>
+        <span class="pill" role="listitem"><i data-lucide="map-pin"></i>Concord</span>
+        <span class="pill" role="listitem"><i data-lucide="map-pin"></i>Belmont</span>
+        <span class="pill" role="listitem"><i data-lucide="map-pin"></i>Arlington</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FAQ ───────────────────────────────────────────────── -->
+<section class="section faq" id="faq" aria-label="Frequently asked questions">
+  <div class="container">
+    <div class="rv centered" style="text-align:center;max-width:600px;margin:0 auto">
+      <p class="eyebrow">Questions</p>
+      <h2>Frequently Asked Questions</h2>
+    </div>
+    <div class="faq-list rv" role="list">
+
+      <div class="faq-item" role="listitem">
+        <button class="fq" aria-expanded="false">
+          How long does interior painting typically take?
+          <span class="fq-icon" aria-hidden="true"><i data-lucide="plus"></i></span>
+        </button>
+        <div class="fa-body" role="region">Most single-room interiors take 1–2 days. A full home interior typically takes 3–7 days depending on size, number of colors, and surface condition. We provide a precise timeline with every written estimate.</div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="fq" aria-expanded="false">
+          Do you move furniture before painting?
+          <span class="fq-icon" aria-hidden="true"><i data-lucide="plus"></i></span>
+        </button>
+        <div class="fa-body" role="region">Yes — we move and protect all furniture before we begin. We use drop cloths, plastic sheeting, and painter's tape to protect floors, fixtures, and belongings. You don't need to do a thing before we arrive.</div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="fq" aria-expanded="false">
+          What brands of paint do you use?
+          <span class="fq-icon" aria-hidden="true"><i data-lucide="plus"></i></span>
+        </button>
+        <div class="fa-body" role="region">We work exclusively with Benjamin Moore and Sherwin-Williams professional-grade lines. These products deliver superior coverage, durability, and color retention. We never use builder-grade or big-box paints — your finish will look better and last longer.</div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="fq" aria-expanded="false">
+          Are you licensed and insured?
+          <span class="fq-icon" aria-hidden="true"><i data-lucide="plus"></i></span>
+        </button>
+        <div class="fa-body" role="region">Absolutely. {{BUSINESS_NAME}} is fully licensed in Massachusetts and carries $2 million in general liability insurance plus workers' compensation. We're happy to provide certificates of insurance before any project begins.</div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="fq" aria-expanded="false">
+          Do you offer a warranty on your work?
+          <span class="fq-icon" aria-hidden="true"><i data-lucide="plus"></i></span>
+        </button>
+        <div class="fa-body" role="region">Yes — all {{BUSINESS_NAME}} projects come with a written 2-year craftsmanship warranty. If paint peels, bubbles, or fails due to our application, we'll fix it at no charge. We stand behind every project we complete.</div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="fq" aria-expanded="false">
+          How do I get a quote?
+          <span class="fq-icon" aria-hidden="true"><i data-lucide="plus"></i></span>
+        </button>
+        <div class="fa-body" role="region">Getting a quote is easy and completely free. Fill out the form below, call us at {{PHONE}}, or email {{EMAIL}}. We'll schedule a walkthrough and deliver a detailed written estimate within 24 hours.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── CONTACT ───────────────────────────────────────────── -->
+<section class="section contact" id="contact" aria-label="Contact and quote request">
+  <div class="container">
+    <div class="c-hero rv">
+      <h2>Ready to Transform<br><em>Your Space?</em></h2>
+      <a href="tel:{{PHONE_RAW}}" class="c-phone" aria-label="Call {{PHONE}}">{{PHONE}}</a>
+      <p class="c-email">Or email us at <a href="mailto:{{EMAIL}}">{{EMAIL}}</a></p>
+    </div>
+    <div class="c-grid">
+      <div class="c-info rvL">
+        <h3>Get in Touch</h3>
+        <div class="c-detail">
+          <div class="c-icon"><i data-lucide="phone"></i></div>
+          <div><h4>Phone</h4><a href="tel:{{PHONE_RAW}}">{{PHONE}}</a></div>
         </div>
-    </section>
-
-    <!-- Portfolio -->
-    <section class="section work" id="work">
-        <div class="section-header reveal">
-            <p class="section-eyebrow" style="color:rgba(201,162,39,0.9)">Portfolio</p>
-            <h2>Recent Projects</h2>
-            <p style="color:rgba(255,255,255,0.65)">Browse our portfolio of completed work. Each project showcases our commitment to quality and attention to detail.</p>
+        <div class="c-detail">
+          <div class="c-icon"><i data-lucide="mail"></i></div>
+          <div><h4>Email</h4><a href="mailto:{{EMAIL}}">{{EMAIL}}</a></div>
         </div>
-        <div class="work-grid reveal">
-            <div class="work-item wi-1">
-                <div class="work-item-bg"></div>
-                <span class="work-item-tag">Interior</span>
-                <div class="work-item-overlay"><h4>Modern Living Room</h4><p>Interior Painting</p></div>
-            </div>
-            <div class="work-item wi-2">
-                <div class="work-item-bg"></div>
-                <span class="work-item-tag">Exterior</span>
-                <div class="work-item-overlay"><h4>Victorian Restoration</h4><p>Exterior Painting</p></div>
-            </div>
-            <div class="work-item wi-3">
-                <div class="work-item-bg"></div>
-                <span class="work-item-tag">Cabinets</span>
-                <div class="work-item-overlay"><h4>Kitchen Transformation</h4><p>Cabinet Refinishing</p></div>
-            </div>
-            <div class="work-item wi-4">
-                <div class="work-item-bg"></div>
-                <span class="work-item-tag">Commercial</span>
-                <div class="work-item-overlay"><h4>Office Complex</h4><p>Commercial Painting</p></div>
-            </div>
-            <div class="work-item wi-5">
-                <div class="work-item-bg"></div>
-                <span class="work-item-tag">Interior</span>
-                <div class="work-item-overlay"><h4>Bedroom Suite</h4><p>Interior Painting</p></div>
-            </div>
-            <div class="work-item wi-6">
-                <div class="work-item-bg"></div>
-                <span class="work-item-tag">Exterior</span>
-                <div class="work-item-overlay"><h4>Historic Home</h4><p>Exterior Restoration</p></div>
-            </div>
+        <div class="c-detail">
+          <div class="c-icon"><i data-lucide="map-pin"></i></div>
+          <div><h4>Service Area</h4><p>{{CITY}}, MA</p></div>
         </div>
-    </section>
-
-    <!-- CTA Band -->
-    <section class="cta-band">
-        <div class="cta-band-content reveal">
-            <div>
-                <h2>Ready to Transform Your Space?</h2>
-                <p>Get your free, no-obligation estimate today — we respond within 24 hours.</p>
-            </div>
-            <a href="#contact" class="btn-dark"><i data-lucide="arrow-right"></i>Request Free Estimate</a>
+        <div class="c-detail">
+          <div class="c-icon"><i data-lucide="clock"></i></div>
+          <div><h4>Hours</h4><p>Mon&ndash;Fri: 7am&ndash;6pm<br>Sat: 8am&ndash;4pm</p></div>
         </div>
-    </section>
-
-    <!-- Testimonials -->
-    <section class="section testimonials" id="testimonials">
-        <div class="section-header reveal">
-            <p class="section-eyebrow">Testimonials</p>
-            <h2>What Our Clients Say</h2>
-            <p>Don't just take our word for it. Here's what homeowners and businesses say about working with us.</p>
+      </div>
+      <div class="rvR">
+        <div class="c-form">
+          <form id="cForm" novalidate>
+            <div class="form-row">
+              <div class="fg">
+                <label for="fn">Full Name *</label>
+                <input type="text" id="fn" name="name" required placeholder="John Smith" autocomplete="name">
+              </div>
+              <div class="fg">
+                <label for="fp">Phone Number *</label>
+                <input type="tel" id="fp" name="phone" required placeholder="(617) 555-0000" autocomplete="tel">
+              </div>
+            </div>
+            <div class="fg">
+              <label for="fe">Email Address</label>
+              <input type="email" id="fe" name="email" placeholder="john@email.com" autocomplete="email">
+            </div>
+            <div class="fg">
+              <label for="fs">Service Needed *</label>
+              <select id="fs" name="service" required>
+                <option value="">Select a service...</option>
+                <option>Interior Painting</option>
+                <option>Exterior Painting</option>
+                <option>Cabinet Refinishing</option>
+                <option>Commercial Painting</option>
+                <option>Deck Staining</option>
+                <option>Color Consultation</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="fg">
+              <label for="fm">Project Details</label>
+              <textarea id="fm" name="message" placeholder="Tell us about your project — size, timeline, any questions..."></textarea>
+            </div>
+            <button type="submit" class="btn-sub">
+              <i data-lucide="send" style="width:17px;height:17px;"></i>
+              Request Free Estimate
+            </button>
+          </form>
+          <div class="form-ok" id="formOk" role="alert" aria-live="assertive">
+            <i data-lucide="check-circle" style="width:56px;height:56px;color:var(--sienna);display:block;margin:0 auto 1rem;"></i>
+            <h3>Request Received!</h3>
+            <p>We'll reach out within 24 hours to schedule your free estimate. Thank you for choosing {{BUSINESS_NAME}}</p>
+          </div>
         </div>
-        <div class="testimonials-aggregate reveal">
-            <div class="agg-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-            <div class="agg-label">5.0 average rating &middot; 100+ reviews</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ────────────────────────────────────────────── -->
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="ft-main">
+      <div class="ft-brand">
+        <h3><span class="logo-mark" aria-hidden="true">S</span>{{BUSINESS_NAME}}</h3>
+        <p>Premium painting for discerning homeowners and businesses across {{CITY}}. Licensed, insured, and backed by a 2-year warranty.</p>
+        <div class="ft-socials">
+          <a href="#" class="ft-soc" aria-label="Facebook"><i data-lucide="facebook"></i></a>
+          <a href="#" class="ft-soc" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+          <a href="#" class="ft-soc" aria-label="Houzz"><i data-lucide="layout-grid"></i></a>
         </div>
-        <div class="testimonials-grid">
-            <div class="testimonial-card reveal">
-                <span class="testimonial-quote-icon">&ldquo;</span>
-                <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                <p class="testimonial-text">&ldquo;Absolutely exceptional work. The attention to detail was remarkable, and they treated our home with such care. The finish is completely flawless.&rdquo;</p>
-                <div class="testimonial-author">
-                    <div class="author-avatar">SM</div>
-                    <div class="author-info"><h4>Sarah Mitchell</h4><p>Homeowner, {{CITY}}</p></div>
-                </div>
-            </div>
-            <div class="testimonial-card reveal reveal-delay-1">
-                <span class="testimonial-quote-icon">&ldquo;</span>
-                <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                <p class="testimonial-text">&ldquo;Professional from start to finish. They completed our office renovation on time and on budget. The team was courteous, clean, and incredibly efficient.&rdquo;</p>
-                <div class="testimonial-author">
-                    <div class="author-avatar">JR</div>
-                    <div class="author-info"><h4>James Rodriguez</h4><p>Business Owner, {{CITY}}</p></div>
-                </div>
-            </div>
-            <div class="testimonial-card reveal reveal-delay-2">
-                <span class="testimonial-quote-icon">&ldquo;</span>
-                <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                <p class="testimonial-text">&ldquo;Our cabinets look brand new! The transformation exceeded our expectations. Worth every penny for the quality we received.&rdquo;</p>
-                <div class="testimonial-author">
-                    <div class="author-avatar">EK</div>
-                    <div class="author-info"><h4>Emily Kim</h4><p>Homeowner, {{CITY}}</p></div>
-                </div>
-            </div>
-        </div>
-    </section>
+      </div>
+      <div class="ft-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">Interior Painting</a></li>
+          <li><a href="#services">Exterior Painting</a></li>
+          <li><a href="#services">Commercial</a></li>
+          <li><a href="#services">Cabinet Refinishing</a></li>
+          <li><a href="#services">Deck Staining</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#portfolio">Our Work</a></li>
+          <li><a href="#testimonials">Reviews</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:{{PHONE_RAW}}">{{PHONE}}</a></li>
+          <li><a href="mailto:{{EMAIL}}">{{EMAIL}}</a></li>
+          <li><a href="#areas">{{CITY}}, MA</a></li>
+          <li style="color:rgba(255,255,255,.28);font-size:.82rem;line-height:1.6">Mon–Fri 7am–6pm<br>Sat 8am–4pm</li>
+        </ul>
+      </div>
+    </div>
+    <div class="ft-bottom">
+      <p>&copy; {{YEAR}} {{BUSINESS_NAME}} All rights reserved.</p>
+      <div class="ft-badges">
+        <span class="ft-badge"><i data-lucide="shield-check"></i>Licensed &amp; Insured</span>
+        <span class="ft-badge"><i data-lucide="award"></i>2-Year Warranty</span>
+      </div>
+    </div>
+  </div>
+</footer>
 
-    <!-- Contact -->
-    <section class="section contact" id="contact">
-        <div class="section-header reveal">
-            <p class="section-eyebrow">Get Started</p>
-            <h2>Request Your Free Estimate</h2>
-            <p>Ready to transform your space? Contact us today for a free, no-obligation quote.</p>
-        </div>
-        <div class="contact-grid">
-            <div class="contact-info reveal">
-                <h3>Let&rsquo;s Talk</h3>
-                <div class="contact-method">
-                    <div class="contact-method-icon"><i data-lucide="phone"></i></div>
-                    <div><h4>Phone</h4><a href="tel:{{PHONE}}">{{PHONE}}</a></div>
-                </div>
-                <div class="contact-method">
-                    <div class="contact-method-icon"><i data-lucide="mail"></i></div>
-                    <div><h4>Email</h4><a href="mailto:{{EMAIL}}">{{EMAIL}}</a></div>
-                </div>
-                <div class="contact-method">
-                    <div class="contact-method-icon"><i data-lucide="map-pin"></i></div>
-                    <div><h4>Location</h4><p>{{ADDRESS}}</p></div>
-                </div>
-                <div class="contact-method">
-                    <div class="contact-method-icon"><i data-lucide="clock"></i></div>
-                    <div><h4>Business Hours</h4><p>Mon&ndash;Fri: 8am&ndash;6pm<br>Sat: 9am&ndash;4pm</p></div>
-                </div>
-            </div>
-            <div class="contact-form reveal reveal-delay-1">
-                <p class="contact-form-title">Tell Us About Your Project</p>
-                <form action="{{FORM_ENDPOINT}}" method="POST">
-                    <div class="form-row">
-                        <div class="form-group"><label for="name">Full Name *</label><input type="text" id="name" name="name" required placeholder="John Smith"></div>
-                        <div class="form-group"><label for="phone">Phone Number *</label><input type="tel" id="phone" name="phone" required placeholder="(555) 123-4567"></div>
-                    </div>
-                    <div class="form-group"><label for="email">Email Address</label><input type="email" id="email" name="email" placeholder="john@example.com"></div>
-                    <div class="form-group">
-                        <label for="service">Service Needed *</label>
-                        <select id="service" name="service" required>
-                            <option value="">Select a service...</option>
-                            <option value="interior">Interior Painting</option>
-                            <option value="exterior">Exterior Painting</option>
-                            <option value="cabinets">Cabinet Refinishing</option>
-                            <option value="commercial">Commercial Painting</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
-                    <div class="form-group"><label for="message">Project Details</label><textarea id="message" name="message" placeholder="Tell us about your project, timeline, and any specific requirements..."></textarea></div>
-                    <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;font-size:1rem;padding:1.1rem;"><i data-lucide="send"></i>Request Free Estimate</button>
-                </form>
-            </div>
-        </div>
-    </section>
+<script>
+lucide.createIcons();
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-grid">
-            <div class="footer-brand">
-                <h3><span class="nav-logo-dot"></span>{{BUSINESS_NAME}}</h3>
-                <p>Premium painting services for residential and commercial properties. Licensed, insured, and committed to excellence in every brushstroke.</p>
-                <div class="footer-social">
-                    <a href="#" aria-label="Facebook"><i data-lucide="facebook" style="width:16px;height:16px;"></i></a>
-                    <a href="#" aria-label="Instagram"><i data-lucide="instagram" style="width:16px;height:16px;"></i></a>
-                    <a href="#" aria-label="LinkedIn"><i data-lucide="linkedin" style="width:16px;height:16px;"></i></a>
-                </div>
-            </div>
-            <div class="footer-links">
-                <h4>Services</h4>
-                <ul>
-                    <li><a href="#services">Interior Painting</a></li>
-                    <li><a href="#services">Exterior Painting</a></li>
-                    <li><a href="#services">Cabinet Refinishing</a></li>
-                    <li><a href="#services">Commercial Painting</a></li>
-                </ul>
-            </div>
-            <div class="footer-links">
-                <h4>Company</h4>
-                <ul>
-                    <li><a href="#work">Our Work</a></li>
-                    <li><a href="#process">Our Process</a></li>
-                    <li><a href="#testimonials">Reviews</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </div>
-            <div class="footer-links">
-                <h4>Contact</h4>
-                <ul>
-                    <li><a href="tel:{{PHONE}}">{{PHONE}}</a></li>
-                    <li><a href="mailto:{{EMAIL}}">{{EMAIL}}</a></li>
-                    <li>{{ADDRESS}}</li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; {{YEAR}} {{BUSINESS_NAME}}. All rights reserved.</p>
-            <p>Licensed &amp; Insured &middot; {{CITY}}</p>
-        </div>
-    </footer>
+// Nav scroll
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('on', window.scrollY > 60), {passive:true});
 
-    <script>
-        lucide.createIcons();
+// Mobile menu
+const hamburger = document.getElementById('hamburger');
+const mob = document.getElementById('mob');
+const mobClose = document.getElementById('mobClose');
+function openMob() { mob.classList.add('open'); document.body.style.overflow='hidden'; hamburger.setAttribute('aria-expanded','true'); }
+function closeMob() { mob.classList.remove('open'); document.body.style.overflow=''; hamburger.setAttribute('aria-expanded','false'); }
+hamburger.addEventListener('click', openMob);
+mobClose.addEventListener('click', closeMob);
+mob.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMob));
 
-        // Scroll nav
-        const nav = document.getElementById('nav');
-        window.addEventListener('scroll', () => {
-            nav.classList.toggle('scrolled', window.scrollY > 80);
-        });
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth',block:'start'}); }
+  });
+});
 
-        // Mobile menu
-        const navToggle = document.getElementById('navToggle');
-        const mobileMenu = document.getElementById('mobileMenu');
-        const mobileOverlay = document.getElementById('mobileOverlay');
-        const mobileMenuClose = document.getElementById('mobileMenuClose');
-        function openMobileMenu() { mobileMenu.classList.add('open'); mobileOverlay.classList.add('open'); document.body.style.overflow = 'hidden'; }
-        function closeMobileMenu() { mobileMenu.classList.remove('open'); mobileOverlay.classList.remove('open'); document.body.style.overflow = ''; }
-        navToggle.addEventListener('click', openMobileMenu);
-        mobileMenuClose.addEventListener('click', closeMobileMenu);
-        mobileOverlay.addEventListener('click', closeMobileMenu);
-        document.querySelectorAll('.mobile-menu-links a').forEach(link => link.addEventListener('click', closeMobileMenu));
+// Scroll reveal
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); } });
+}, {threshold: 0.09});
+document.querySelectorAll('.rv,.rvL,.rvR').forEach(el => obs.observe(el));
 
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
-            });
-        });
+// Carousel
+let cur = 0;
+const track = document.getElementById('tTrack');
+const dots = document.querySelectorAll('.car-dot');
+const total = dots.length;
+function goTo(n) {
+  cur = (n + total) % total;
+  track.style.transform = `translateX(-${cur * 100}%)`;
+  dots.forEach((d,i) => {
+    d.classList.toggle('active', i === cur);
+    d.setAttribute('aria-selected', i === cur);
+  });
+}
+document.getElementById('cPrev').addEventListener('click', () => goTo(cur - 1));
+document.getElementById('cNext').addEventListener('click', () => goTo(cur + 1));
+dots.forEach((d,i) => d.addEventListener('click', () => goTo(i)));
+const autoSlide = setInterval(() => goTo(cur + 1), 6500);
+track.closest('[aria-label]').addEventListener('mouseenter', () => clearInterval(autoSlide));
 
-        // Scroll reveal
-        const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) { entry.target.classList.add('visible'); revealObserver.unobserve(entry.target); }
-            });
-        }, { threshold: 0.12 });
-        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+// FAQ
+document.querySelectorAll('.fq').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => {
+      i.classList.remove('open');
+      i.querySelector('.fq').setAttribute('aria-expanded','false');
+    });
+    if(!isOpen) { item.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
+  });
+});
 
-        // Stats counter
-        function animateCounter(el, target, suffix) {
-            const duration = 1800;
-            const start = performance.now();
-            function update(now) {
-                const progress = Math.min((now - start) / duration, 1);
-                const eased = 1 - Math.pow(1 - progress, 3);
-                el.textContent = Math.floor(eased * target) + (suffix || '');
-                if (progress < 1) requestAnimationFrame(update);
-            }
-            requestAnimationFrame(update);
-        }
-        const statsObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const el = entry.target;
-                    const target = parseInt(el.dataset.target);
-                    animateCounter(el, target, target === 98 ? '%' : '+');
-                    statsObserver.unobserve(el);
-                }
-            });
-        }, { threshold: 0.5 });
-        document.querySelectorAll('.stat-number[data-target]').forEach(el => statsObserver.observe(el));
-
-        // Hide floating CTA when contact visible
-        const floatCta = document.getElementById('floatCta');
-        const contactSection = document.getElementById('contact');
-        if (floatCta && contactSection) {
-            const floatObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => { floatCta.style.opacity = entry.isIntersecting ? '0' : '1'; });
-            }, { threshold: 0.3 });
-            floatObserver.observe(contactSection);
-        }
-
-        // Form submit
-        document.querySelector('.contact-form form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            this.innerHTML = '<div style="text-align:center;padding:50px 20px;"><div style="width:64px;height:64px;background:var(--color-accent-light);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;color:var(--color-accent)"><i data-lucide="check-circle" style="width:32px;height:32px;"></i></div><h3 style="color:var(--color-primary);margin-bottom:10px;">Request Received!</h3><p>Thank you — we\'ll be in touch within 24 hours to schedule your free estimate.</p></div>';
-            lucide.createIcons();
-        });
-    </script>
+// Form
+document.getElementById('cForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const name = this.name.value.trim();
+  const phone = this.phone.value.trim();
+  const service = this.service.value;
+  if(!name || !phone || !service){
+    const missing = [];
+    if(!name) missing.push('Name');
+    if(!phone) missing.push('Phone');
+    if(!service) missing.push('Service');
+    alert('Please fill in: ' + missing.join(', '));
+    return;
+  }
+  this.style.display = 'none';
+  const ok = document.getElementById('formOk');
+  ok.style.display = 'block';
+  lucide.createIcons();
+});
+</script>
 </body>
 </html>
